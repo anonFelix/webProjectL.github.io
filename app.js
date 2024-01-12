@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 const hostname = '192.168.178.38';
-const port = 3005
+const port = process.env.PORT || 3000;
 
 const path = require('path');
 const fs = require('fs');
@@ -53,6 +53,6 @@ app.use(function(e, req, res, next) {
       res.status(400).render('notfound.ejs');
   }
 });
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+  console.log(`Server running at ${port}`);
 });

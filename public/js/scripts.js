@@ -52,3 +52,64 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+
+
+var k = 1;
+
+function toggleMore(){
+    const vh = document.documentElement.clientWidth;
+    console.log(vh);
+    if(k==1){
+        document.getElementById("toggleButton").setAttribute('data-bs-target', ".collapsible2");
+        document.getElementById("toggleButton").setAttribute('aria-expanded', 'true');
+        k++;
+        
+        scrollToSec('scrollTo1', 200);
+        
+    }else{
+        if(k==2 && document.getElementById("toggleButton").getAttribute('aria-expanded')=="true"){
+            if(vh<1000){
+                const element = document.getElementById("toggleButton");
+                element.remove();
+            }else{
+                document.getElementById("toggleButton").innerHTML = "HIDE";
+                k++;
+            
+                scrollToSec('scrollTo2', 200);;
+            }
+        }else{
+        if(k==3 && document.getElementById("toggleButton").getAttribute('aria-expanded')=="false"){
+                document.getElementById("toggleButton").setAttribute('data-bs-target', ".collapsible");
+                document.getElementById("toggleButton").setAttribute('aria-expanded', 'false');
+                k++;
+                document.getElementById("toggleButton").innerHTML = "HIDE";
+                scrollToSec('scrollTo1', 200);
+            
+        }else{
+            
+            if(k==4 && document.getElementById("toggleButton").getAttribute('aria-expanded')=="false" && vh>1000){
+                k=1;
+                document.getElementById("toggleButton").innerHTML = "MORE";
+                    scrollToSec('portfolio', 50);
+                
+            }}
+        }
+    }
+}
+
+
+function scrollToSec(section, int){
+    var targetElement = $('#'+section);
+    $('html, body').stop().animate({
+        scrollTop: (targetElement.offset().top - int)
+    }, 550, 'easeInOutExpo');
+}
+
+$('a.page-scroll').bind('click', function(event) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+        scrollTop: ($($anchor.attr('href')).offset().top - 50)
+    }, 1000, 'easeInOutExpo');
+    event.preventDefault();
+});
